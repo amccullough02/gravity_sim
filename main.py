@@ -8,9 +8,10 @@ WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.DOUBLEBUF, vsync=1)
 pygame.display.set_caption("N-body Sim")
 
 BLACK = (0, 0, 0)
+YELLOW = (255, 255, 0)
 
 
-class Planet:
+class Body:
     AU = (149.6e6 * 1000)  # Distance from Sun in meters.
     G = 6.67428e-11  # Gravitational constant.
     SCALE = 250 / AU  # 1AU = 100 pixels
@@ -24,7 +25,7 @@ class Planet:
         self.colour = colour
 
         self.orbit = []
-        self.sun = False
+        self.is_sun = False
         self.distance_to_sun = 0
 
         self.x_vel = 0
@@ -40,14 +41,23 @@ def main():
     run = True
     clock = pygame.time.Clock()
 
+    sun = Body(0, 0, 30, 1.98892 * 10**30, YELLOW)
+    sun.is_sun = True
+
+    bodies = [sun]
+
     while run:
         clock.tick(60)
         WIN.fill(BLACK)
-        pygame.display.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+
+        for body in bodies:
+            body.draw(WIN)
+
+        pygame.display.update()
 
     pygame.quit()
 
