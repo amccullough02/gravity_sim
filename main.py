@@ -1,5 +1,4 @@
 import pygame
-import math
 from body import Body
 from constants import (HEIGHT, WIDTH, BLACK, YELLOW, BLUE, RED, DARK_GREY,
                        LIGHT_YELLOW)
@@ -14,13 +13,17 @@ pygame.display.set_caption("N-body Sim")
 sun = Body(0, 0, 30, 1.98892 * 10**30, YELLOW)
 sun.is_sun = True
 
-earth = Body(-1 * Body.AU, 0, 16, 5.9742 * 10**24, BLUE)
-
-mars = Body(-1.524 * Body.AU, 0, 12, 6.39 * 10**23, RED)
-
 mercury = Body(0.387 * Body.AU, 0, 8, 0.330 * 10**24, DARK_GREY)
+mercury.y_vel = -47.4 * 1000
 
 venus = Body(0.723 * Body.AU, 0, 14, 4.86 * 10**24, LIGHT_YELLOW)
+venus.y_vel = -35.02 * 1000
+
+earth = Body(-1 * Body.AU, 0, 16, 5.9742 * 10**24, BLUE)
+earth.y_vel = 29.783 * 1000
+
+mars = Body(-1.524 * Body.AU, 0, 12, 6.39 * 10**23, RED)
+mars.y_vel = 24.077 * 1000
 
 bodies = [sun, mercury, venus, earth, mars]
 
@@ -38,6 +41,7 @@ def main():
                 run = False
 
         for body in bodies:
+            body.update_position(bodies)
             body.draw(WIN)
 
         pygame.display.update()
