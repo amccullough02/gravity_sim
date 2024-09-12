@@ -3,6 +3,7 @@ WIDTH, HEIGHT = 800, 800
 
 # Colour Constants
 BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
 YELLOW = (255, 255, 0)
 BLUE = (100, 150, 255)
 RED = (188, 39, 50)

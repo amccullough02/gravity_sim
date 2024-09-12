@@ -4,9 +4,10 @@ from constants import (HEIGHT, WIDTH, BLACK, YELLOW, BLUE, RED, DARK_GREY,
                        LIGHT_YELLOW)
 
 pygame.init()
+pygame.display.set_caption("N-body Sim")
 
 WIN = pygame.display.set_mode((WIDTH, HEIGHT), pygame.DOUBLEBUF, vsync=1)
-pygame.display.set_caption("N-body Sim")
+FONT = pygame.font.SysFont("comicsans", 16)
 
 # Bodies
 
@@ -42,7 +43,7 @@ def main():
 
         for body in bodies:
             body.update_position(bodies)
-            body.draw(WIN)
+            body.draw(WIN, FONT)
 
         pygame.display.update()
 

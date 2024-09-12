@@ -1,6 +1,6 @@
 import pygame
 import math
-from constants import HEIGHT, WIDTH
+from constants import HEIGHT, WIDTH, WHITE
 
 
 class Body:
@@ -23,7 +23,7 @@ class Body:
         self.x_vel = 0
         self.y_vel = 0
 
-    def draw(self, win):
+    def draw(self, win, font):
         x = self.x * self.SCALE + WIDTH / 2
         y = self.y * self.SCALE + HEIGHT / 2
 
@@ -38,6 +38,11 @@ class Body:
             pygame.draw.lines(win, self.colour, False, updated_points, 2)
 
         pygame.draw.circle(win, self.colour, (x, y), self.radius)
+        if not self.is_sun:
+            distance_text = font.render(
+                f"{round(self.distance_to_sun/1000, 1)}km", 1, WHITE)
+            win.blit(distance_text, (x - distance_text.get_width() /
+                     2, y - distance_text.get_height() / 2))
 
     def attraction(self, other):
         other_x, other_y = other.x, other.y
